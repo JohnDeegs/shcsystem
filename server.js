@@ -17,7 +17,10 @@ const session = require('express-session');
 
 const configDB = require('./config/db.js');
 
+const infoSchema = require('./app/models/userinfo.js');
+
 // configuration ===============================================================
+mongoose.Promise = global.Promise;
 mongoose.connect(configDB.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
@@ -30,7 +33,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({
+	 secret: 'mywebapp',
+	 resave: 'true',
+	 saveUninitialized: true
+  })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

@@ -1,4 +1,4 @@
-const infoSchema = require('../app/models/userinfo');
+const infoSchema = require('./models/userinfo.js');
 
 // app/routes.js
 module.exports = function(app, passport) {
@@ -53,15 +53,83 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn,(req, res) => {
-        res.render('profile.ejs', {
-            user : req.user // get the user out of session and pass to template
+
+      let user_id = req.user.id;
+
+      infoSchema.findOne({
+      belongs_to: user_id
+    }, (err, info) => {
+          res.render('profile.ejs', {
+            userData: info
+          });
         });
+
+    /*  //gets the data we want from our db
+      infoSchema.findOne({_id: user_id})
+        .exec((err, info) => {
+          if(!!err){
+            console.log("Error occurred");
+          }else {
+            console.log("Success!");
+            info = JSON.stringify(info);
+            console.log(info);
+            res.render('profile.ejs', {
+              userData: info
+            });
+          }
+        })*/
+
+          /*res.render('profile.ejs', {
+              user : req.user, // get the user out of session and pass to template
+              items: doc
+            });*/
+
     });
 
     // Allow the doctor to save his/her own information
     //app.post('/profile', isLoggedIn, (req, res) => {
 
   //  });
+
+
+    //======================================
+    // EDIT PROFILE ========================
+    //======================================
+    //This allows the doctor to edit his/her own information
+
+    app.get('/profile/edit', isLoggedIn, (req, res) => {
+      res.render('editProfile.ejs', {
+        user: req.user
+      });
+    });
+
+    //======================================
+    // Save PROFILE ========================
+    //======================================
+    //This allows the doctor to save his/her own information
+
+    app.post('/profile/edit/save', isLoggedIn, (req, res) => {
+      var input = JSON.parse(JSON.stringify(req.body));
+
+    //  console.log(input);
+
+      const saveData = (args, err) => {
+        if(!!err){
+          console.log("Error retrieving data");
+          return false;
+        }else{
+          let data = new infoSchema(args);
+          //this pushes our user's unique ID to the collection
+          data.belongs_to.push(req.user.id);
+          data.save();
+          console.log("Passed data successfully");
+        }
+      }
+
+      saveData(input);
+
+      res.redirect('/profile');
+    });
 
     // =====================================
     // LOGOUT ==============================
