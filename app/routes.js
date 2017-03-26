@@ -57,32 +57,12 @@ module.exports = function(app, passport) {
       let user_id = req.user.id;
 
       infoSchema.findOne({
-      belongs_to: user_id
-    }, (err, info) => {
-          res.render('profile.ejs', {
-            userData: info
-          });
-        });
-
-    /*  //gets the data we want from our db
-      infoSchema.findOne({_id: user_id})
-        .exec((err, info) => {
-          if(!!err){
-            console.log("Error occurred");
-          }else {
-            console.log("Success!");
-            info = JSON.stringify(info);
-            console.log(info);
+      belongs_to: user_id //allows us to get data specific to the user
+      }, (err, info) => {
             res.render('profile.ejs', {
               userData: info
             });
-          }
-        })*/
-
-          /*res.render('profile.ejs', {
-              user : req.user, // get the user out of session and pass to template
-              items: doc
-            });*/
+        });
 
     });
 
@@ -129,6 +109,16 @@ module.exports = function(app, passport) {
       saveData(input);
 
       res.redirect('/profile');
+    });
+
+    //======================================
+    // PATIENTS ============================
+    //======================================
+
+    app.get('/profile/patients', isLoggedIn, (req, res) => {
+      res.render('patients.ejs', {
+        user: req.user
+      });
     });
 
     // =====================================

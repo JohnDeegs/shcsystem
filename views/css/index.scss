@@ -63,3 +63,13 @@ p{
 p{
 
 }
+
+#patientLink {
+  text-decoration: none; /* no underline */
+  color: #000;
+}
+
+#patientLink:hover {
+  text-decoration: none; /* no underline */
+  color: #5cb85c;
+}
