@@ -3,9 +3,22 @@ $height-footer: 60px;
 html {
   min-height: 100%;
   position: relative;
+
+
   body {
     margin-bottom: $height-footer;
+    font-family: 'Open Sans', sans-serif;
   }
+
+  #profiler{
+    width: 100%;
+    height: 150px;
+  }
+
+  #imageSection{
+    padding: 0px;
+  }
+
   #footer {
     bottom: 0;
     width: 100%;
@@ -15,5 +28,34 @@ html {
     .footer-block {
       margin: 20px 0;
     }
+
   }
+}
+
+#userDetails{
+  list-style-type:none;
+  padding: 0px;
+  width: 50%
+}
+
+#editBtn{
+  margin: 0 auto;
+  display: block;
+}
+
+#patientsTotal{
+
+}
+
+#patientTag{
+  display: inline-block;
+}
+
+#pNumber{
+  font-size: 16px;
+  font-weight: 800;
+}
+
+p{
+
 }
