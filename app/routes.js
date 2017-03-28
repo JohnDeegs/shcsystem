@@ -1,4 +1,5 @@
 const infoSchema = require('./models/userinfo.js');
+const patientSchema = require('./models/patients.js');
 
 // app/routes.js
 module.exports = function(app, passport) {
@@ -115,10 +116,40 @@ module.exports = function(app, passport) {
     // PATIENTS ============================
     //======================================
 
+    //Get all patients
+
     app.get('/profile/patients', isLoggedIn, (req, res) => {
-      res.render('patients.ejs', {
-        user: req.user
-      });
+
+      patientSchema.find({})
+      .exec((err, patients) => {
+        if(!!err){
+          console.log("Error occurred");
+        }else{
+          console.log("Got data!");
+          res.render('patients.ejs', {
+            user: req.user,
+            patientData: patients
+          });
+        }
+      })
+
+    });
+
+    app.post('/profile/patients/add', isLoggedIn, (req, res) => {
+
+      let data = new patientSchema();
+
+      data.name = 'John Smith';
+      data.age = '21';
+      data.gender = 'male';
+      data.address = 'Flower Lane, Dublin 1';
+      data.phone = '085736472';
+      data.belongs_to.push(req.user.id);
+
+      data.save();
+
+      console.log("Success!");
+
     });
 
     // =====================================
