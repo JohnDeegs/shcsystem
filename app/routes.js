@@ -1,13 +1,14 @@
 const infoSchema = require('./models/userinfo.js');
 const patientSchema = require('./models/patients.js');
+const db = ('./config/db.js').url;
 
 // app/routes.js
-module.exports = function(app, passport) {
+module.exports = (app, passport) => {
 
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
-    app.get('/', function(req, res) {
+    app.get('/', (req, res) => {
         res.render('index.ejs'); // load the index.ejs file
     });
 
@@ -15,7 +16,7 @@ module.exports = function(app, passport) {
     // LOGIN ===============================
     // =====================================
     // show the login form
-    app.get('/login', function(req, res) {
+    app.get('/login', (req, res) => {
         // render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') });
     });
@@ -60,9 +61,14 @@ module.exports = function(app, passport) {
       infoSchema.findOne({
       belongs_to: user_id //allows us to get data specific to the user
       }, (err, info) => {
-            res.render('profile.ejs', {
-              userData: info
-            });
+        if(err){
+          console.log("Error occured");
+          return false;
+        }else{
+          res.render('profile.ejs', {
+            userData: info
+          });
+        }
         });
 
     });
@@ -151,6 +157,56 @@ module.exports = function(app, passport) {
       console.log("Success!");
 
     });
+
+    app.get('/profile/patients/view/:id', isLoggedIn, (req, res) => {
+      let id = req.params.id;
+
+      patientSchema.findOne({
+      _id : id //allows us to get data specific to the user
+    }, (err, patientArg) => {
+        if(err){
+          console.log("Error occured");
+          return false;
+        }else{
+          console.log(patientArg);
+          res.render('onePatient.ejs', {
+            onePatientData: patientArg
+          });
+        }
+        });
+
+      console.log(id);
+    });
+
+    //======================================
+    // SEACRH PATIENTS =====================
+    //======================================
+
+    app.get('/profile/patients/search', isLoggedIn, (req, res) => {
+      let key = req.query.key;
+
+      patientSchema.find({})
+      .exec((err, patients) => {
+        if(!!err){
+          console.log("Error occurred");
+        }else{
+          let jsonData = JSON.stringify(patients);
+          console.log("Got data!");
+          res.send(jsonData);
+        }
+      });
+
+    });
+
+    /*app.get('/profile/patients/search', isLoggedIn, (req, res) => {
+
+
+          res.render('search.ejs', {
+            user: req.user,
+          });
+
+
+    });*/
 
     // =====================================
     // LOGOUT ==============================

@@ -6,11 +6,16 @@
   <title>Smart Healthcare System</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="../css/patients.min.css">
+  <link rel="stylesheet" href="../../css/patients.min.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
-  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="../js/typehead.min.js"></script>
+  <script src="../js/activateTypehead.js"></script>
 </head>
 
 <%- include('partials/navbar') %>
@@ -27,18 +32,29 @@
         <button name="foo" value="upvote">Upvote</button>
       </form>-->
 
-      <div id="patientHolder">
-        <i class="fa fa-male fa-2x" aria-hidden="true"></i>
-        <h3 id="inline">John Deegan</h3>
-        <button class="btn btn-success" >View</button>
-      </div>
+      <form>
+        <div class="form-group">
+          <label for="usr">Quick Search</label>
+          <input class="typeahead tt-query" id="autocomplete" spellcheck="false" autocomplete="off" placeholder="Enter name here" name="patients" type="text" />
+        </div>
+      </form>
+
+      <a href="/profile/patients/search">Advanced Search</a>
 
       <% for(var i = 0; i < patientData.length; i++){%>
 
       <% if(patientData[i].gender === "male") { %>
-        <i class="fa fa-male" aria-hidden="true"></i>
+        <div id="patientHolder">
+          <i class="fa fa-male fa-2x" aria-hidden="true"></i>
+          <h3 id="inline"><%= patientData[i].name; %></h3>
+          <a href="../profile/patients/view/<%=patientData[i].id%>"><button class="btn btn-success" >View</button></a>
+        </div>
       <% } else { %>
-        <i class="fa fa-female" aria-hidden="true"></i>
+        <div id="patientHolder">
+          <i class="fa fa-female fa-2x" aria-hidden="true"></i>
+          <h3 id="inline"><%= patientData[i].name; %></h3>
+          <a href="./profile/patients/view/<%=patientData[i].id%>"><button class="btn btn-success" >View</button></a>
+        </div>
       <% } %>
 
       <% } %>
