@@ -1,5 +1,8 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const infoSchema = require('./models/userinfo.js');
 const patientSchema = require('./models/patients.js');
+const aptSchema = require('./models/appointments.js');
 const db = ('./config/db.js').url;
 
 // app/routes.js
@@ -168,14 +171,12 @@ module.exports = (app, passport) => {
           console.log("Error occured");
           return false;
         }else{
-          console.log(patientArg);
           res.render('onePatient.ejs', {
             onePatientData: patientArg
           });
         }
         });
 
-      console.log(id);
     });
 
     //======================================
@@ -198,15 +199,50 @@ module.exports = (app, passport) => {
 
     });
 
-    /*app.get('/profile/patients/search', isLoggedIn, (req, res) => {
+    //=========================================
+    // APPOINTMENTS ===========================
+    //=========================================
 
+    app.get('/profile/patients/appointments/:id', isLoggedIn, (req, res) => {
 
-          res.render('search.ejs', {
-            user: req.user,
-          });
+      let id = req.params.id;
+      console.log(id);
 
+      aptSchema.findOne({
+      belongs_to : id //allows us to get data specific to the user
+    }, (err, aptArg) => {
+        if(err){
+          console.log("Error occured");
+          return false;
+        }else{
+          let jsonData = JSON.stringify(aptArg);
+          console.log("Got data from app.get('/profile/patients/appointments/:id')");
+          console.log(jsonData)
+          res.send(jsonData);
+        }
+        });
 
-    });*/
+    });
+
+    app.post('/profile/patients/appointments/add/:id', isLoggedIn, (req, res) => {
+
+      //create a new instance of our appointment model
+      let data = new aptSchema();
+
+      //get the data send from our client side POST req and assign it to our schema
+      data.date = req.body.date;
+      data.report = req.body.report;
+      data.belongs_to.push(req.body.belongs_to[0]);
+
+      //console.log(data);
+
+      //save the new schema to our db
+      data.save();
+
+      //console.log("Success!");
+
+    });
+
 
     // =====================================
     // LOGOUT ==============================

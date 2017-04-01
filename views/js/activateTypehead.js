@@ -17,12 +17,14 @@ $(document).ready(function(){
     console.log(obj[0].name);
     });
 
+
     $('#autocomplete').autocomplete({
       minLength: 2,
       source: patient,
       select: (event, ui) => {
         console.log(ui.item.label);
         doSearch(ui.item.label);
+        getApt(ui.item.label);
       }
     });
 
@@ -32,5 +34,9 @@ $(document).ready(function(){
     }
 
     console.log(patient);
+
+
+    //Get patient appointments
+
 
 });
