@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  let $appDiv = $('#appData');
+
   //get the url of the current webpage so we can find out the specific patient we're looking at
   let url = window.location.href;
   console.log(url);
@@ -15,6 +17,9 @@ $(document).ready(function(){
 
     //Parses the data
     let obj = JSON.parse(data);
+
+    //displays appointment db data on page
+    $appDiv.append(''+obj.date+'');
 
     //console.log(obj);
     });
