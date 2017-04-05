@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Smart Healthcare System</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
+
+  <link rel="stylesheet" href="../../../../css/oneApt.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
+
+
+  <!-- This is for date input to work in firefox -->
+  <script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
+  <script src="../../../../js/addapt.js"></script>
+</head>
+
+<body>
+  <!-- This is for date input to work in firefox -->
+  <script>
+    webshims.setOptions('forms-ext', {types: 'date'});
+    webshims.polyfill('forms forms-ext');
+  </script>
+
+<%- include('partials/navbar') %>
+
+<div class="container-fluid">
+
+<h1 class="page-header text-center">New Appointment</h1>
+
+<form method="post" action='' id="saveForm">
+  <div class="form-group">
+    <label for="inputPhoto"> Date:</label>
+    <input type="date" name="date" class="form-control" id="date" aria-describedby="emailHelp" >
+  </div>
+
+  <div class="form-group">
+  <label for="comment">Time:</label>
+  <input type="text" name="time" class="form-control" id="time" aria-describedby="emailHelp" >
+  </div>
+
+  <div class="form-group">
+  <label for="comment"> Report:</label>
+  <textarea class="form-control" name="report" rows="5" id="report"></textarea>
+  </div>
+
+  <button type="submit" id="form-btn" class="btn btn-success">Submit</button>
+</form>
+
+</div>
+
+<footer>
+  <%- include('partials/footer') %>
+</footer>
+
+</body>
+</html>

@@ -52,20 +52,23 @@
         </li>
       </ul>
 
-      <a href="/profile/patients/view/:id/appointments"><button class="btn btn-success">Appointments</button></a>
     </div>
 
-
-    <div class="row">
       <div class="col-xs-12">
-        <h3 class="page-header">Appointment History</h3>
-        <hr />
-        <div id="appData">
-          
+        <h3 class="page-header">Upcoming Appointments</h3>
+        <a href="/profile/patients/appointments/addNew/<%=onePatientData._id %>"><button class="btn btn-success">Add</button></a>
+        <div id="aptFuture">
         </div>
         </p>
       </div>
-    </div>
+
+
+      <div class="col-xs-12">
+        <h3 class="page-header">Appointment History</h3>
+        <div id="aptHistory">
+        </div>
+        </p>
+      </div>
 
   </div>
 

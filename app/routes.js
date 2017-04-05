@@ -99,24 +99,17 @@ module.exports = (app, passport) => {
     //This allows the doctor to save his/her own information
 
     app.post('/profile/edit/save', isLoggedIn, (req, res) => {
-      var input = JSON.parse(JSON.stringify(req.body));
+      let input = JSON.parse(JSON.stringify(req.body));
 
-    //  console.log(input);
+      let id = req.user.id;
+      console.log(input.name);
 
-      const saveData = (args, err) => {
-        if(!!err){
-          console.log("Error retrieving data");
-          return false;
-        }else{
-          let data = new infoSchema(args);
-          //this pushes our user's unique ID to the collection
-          data.belongs_to.push(req.user.id);
-          data.save();
-          console.log("Passed data successfully");
-        }
-      }
+      let query = {'belongs_to': id};
 
-      saveData(input);
+      infoSchema.findOneAndUpdate(query, input, {upsert:false}, (err, doc) => {
+        if (err) throw err;
+        console.log(doc);
+      })
 
       res.redirect('/profile');
     });
@@ -203,12 +196,12 @@ module.exports = (app, passport) => {
     // APPOINTMENTS ===========================
     //=========================================
 
-    app.get('/profile/patients/appointments/:id', isLoggedIn, (req, res) => {
+    app.get('/profile/patients/appointments/get/:id', isLoggedIn, (req, res) => {
 
       let id = req.params.id;
       console.log(id);
 
-      aptSchema.findOne({
+      /*aptSchema.findOne({
       belongs_to : id //allows us to get data specific to the user
     }, (err, aptArg) => {
         if(err){
@@ -220,7 +213,29 @@ module.exports = (app, passport) => {
           console.log(jsonData)
           res.send(jsonData);
         }
+      });*/
+
+        aptSchema.find({
+          'belongs_to': id
+        }, (err, docs) => {
+          if(err) throw err;
+
+
+          let jsonData = JSON.stringify(docs);
+          console.log(docs);
+          res.send(jsonData);
         });
+
+    });
+
+
+    //----------------------
+    // ADD NEW APPOINTMENTS
+    //----------------------
+
+    app.get('/profile/patients/appointments/addNew/:id', isLoggedIn, (req, res) => {
+
+      res.render('newTask.ejs')
 
     });
 
@@ -229,18 +244,66 @@ module.exports = (app, passport) => {
       //create a new instance of our appointment model
       let data = new aptSchema();
 
+      let input = JSON.parse(JSON.stringify(req.body));
+
+      let id = req.params.id;
+      console.log(id);
+
       //get the data send from our client side POST req and assign it to our schema
-      data.date = req.body.date;
-      data.report = req.body.report;
-      data.belongs_to.push(req.body.belongs_to[0]);
+      data.date = input.date;
+      data.report = input.report;
+      data.time = input.time;
+      data.belongs_to.push(id);
 
       //console.log(data);
 
       //save the new schema to our db
       data.save();
 
-      //console.log("Success!");
+      res.redirect('/profile/patients')
 
+      console.log("Success!");
+
+    });
+
+    //Edit appointments
+
+    app.get('/profile/patients/appointments/edit/:id', isLoggedIn, (req, res) => {
+
+      let id = req.params.id;
+      console.log(id);
+
+      aptSchema.findOne({
+      _id : id //allows us to get data specific to the user
+    }, (err, oneAptArg) => {
+        if(err){
+          console.log("Error occured");
+          return false;
+        }else{
+          res.render('oneApt.ejs', {
+            oneAppData: oneAptArg
+          });
+        }
+        });
+
+    });
+
+    app.post('/profile/patients/appointments/save/:id', isLoggedIn, (req, res) => {
+
+      let input = JSON.parse(JSON.stringify(req.body));
+
+      let id = req.params.id;
+      console.log(id);
+
+      let query = {'_id': id};
+      console.log(query);
+
+      aptSchema.findOneAndUpdate(query, input, {upsert:false}, (err, doc) => {
+        if (err) throw err;
+        console.log(doc);
+      })
+
+      res.redirect('/profile/patients');
     });
 
 

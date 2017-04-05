@@ -6,8 +6,9 @@ const Schema = mongoose.Schema;
 // define the schema for our user model
 let aptSchema = mongoose.Schema({
 
-        
+
         date: String,
+        time: String,
         report: String,
         belongs_to: [
           {type: Schema.Types.ObjectId, ref: 'PatientInfos'}
