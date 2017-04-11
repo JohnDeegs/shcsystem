@@ -18,15 +18,15 @@
 
 <%- include('partials/navbar') %>
 
-<div class="container-fluid" id="imageSection">
-  <% if(onePatientData.gender === "male") { %>
-      <i class="fa fa-align-center fa-male fa-5x" aria-hidden="true"></i>
-  <% } else { %>
-      <i class="fa fa-female fa-5x" aria-hidden="true"></i>
-  <% } %>
-</div>
+<div id="pageDiv1" class="container-fluid">
 
-<div class="container-fluid">
+  <div class="container-fluid" id="imageSection">
+    <% if(onePatientData.gender === "male") { %>
+        <i class="fa fa-align-center fa-male fa-5x" aria-hidden="true"></i>
+    <% } else { %>
+        <i class="fa fa-female fa-5x" aria-hidden="true"></i>
+    <% } %>
+  </div>
 
   <div class="row">
 
@@ -34,8 +34,8 @@
 
       <h1 class="page-header"><%= onePatientData.name %></h1>
 
-      <button class="btn btn-success">Edit</button>
-      <button class="btn btn-success">Delete</button>
+      <button id="btnTextEdit" class="btn btn-success">Edit</button>
+      <button id="btnTextDelete" class="btn btn-success">Delete</button>
 
       <ul id="patientList">
         <li>
@@ -54,22 +54,28 @@
 
     </div>
 
-      <div class="col-xs-12">
-        <h3 class="page-header">Upcoming Appointments</h3>
-        <a href="/profile/patients/appointments/addNew/<%=onePatientData._id %>"><button class="btn btn-success">Add</button></a>
-        <div id="aptFuture">
-        </div>
-        </p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div id="divBtnFuture">
+        <h3 id="aptHover" class="page-header">Upcoming Appointments</h3>
       </div>
-
-
-      <div class="col-xs-12">
-        <h3 class="page-header">Appointment History</h3>
-        <div id="aptHistory">
-        </div>
-        </p>
+      <div id="aptFuture">
+        <a href="/profile/patients/appointments/addNew/<%=onePatientData._id %>"><button id="btnText" class="btn btn-success">Add</button></a>
       </div>
+      </p>
+    </div>
 
+
+    <div class="col-md-6">
+      <div id="divBtnHistory">
+        <h3 id="aptHover" class="page-header">Appointment History</h3>
+      </div>
+      <div id="aptHistory">
+      </div>
+      </p>
+    </div>
   </div>
 
 </div>

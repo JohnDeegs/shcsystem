@@ -193,6 +193,50 @@ module.exports = (app, passport) => {
     });
 
     //=========================================
+    // EDIT PATIENTS ==========================
+    //=========================================
+
+    app.get('/profile/patients/edit/:id', isLoggedIn, (req, res) => {
+
+      let id = req.params.id;
+      console.log(id);
+
+      patientSchema.findOne({
+      _id : id //allows us to get data specific to the user
+    }, (err, onePatientArg) => {
+        if(err){
+          console.log("Error occured");
+          return false;
+        }else{
+          res.render('editPatient.ejs', {
+            onePatientData: onePatientArg
+          });
+        }
+        });
+
+    });
+
+    //=========================================
+    // DELETE PATIENTS ========================
+    //=========================================
+
+    app.get('/profile/patients/delete/:id', isLoggedIn, (req, res) => {
+
+      let id = req.params.id;
+      console.log(id);
+
+      patientSchema.findOneAndRemove({_id: id}, (err, user) => {
+        if(err) throw err;
+
+        console.log("OBSOLETE!");
+
+
+      });
+
+      res.redirect('/profile/patients');
+    });
+
+    //=========================================
     // APPOINTMENTS ===========================
     //=========================================
 

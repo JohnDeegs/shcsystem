@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Smart Healthcare System</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="../css/editPatient.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+
+<%- include('partials/navbar') %>
+
+<div class="container-fluid" id="imageSection">
+  <img class="img-responsive" id="profiler" src="https://image.freepik.com/free-photo/doctor-smiling-with-stethoscope_1154-36.jpg" />
+</div>
+
+<div class="container-fluid">
+
+  <form method="post" action="/profile/edit/save">
+    <div class="form-group">
+      <label for="inputCity"><i class="fa fa-user-circle" aria-hidden="true"></i></i>  Name:</label>
+      <input type="text" name="city" class="form-control" id="" aria-describedby="emailHelp" placeholder="<%=onePatientData.name%>">
+    </div>
+    <div class="form-group">
+      <label for="inputCity"><i class="fa fa-calendar" aria-hidden="true"></i></i>  Age:</label>
+      <input type="text" name="city" class="form-control" id="" aria-describedby="emailHelp" placeholder="<%=onePatientData.age%>">
+    </div>
+    <div class="form-group">
+      <label for="inputWork"><i class="fa fa-male" aria-hidden="true"></i>/<i class="fa fa-female" aria-hidden="true"></i>  Gender:</label>
+      <input type="text" name="work" class="form-control" id="" aria-describedby="emailHelp" placeholder="<%=onePatientData.gender%>">
+    </div>
+    <div class="form-group">
+      <label for="inputPhoto"><i class="fa fa-phone" aria-hidden="true"></i>  Phone:</label>
+      <input type="text" name="photo" class="form-control" id="" aria-describedby="emailHelp" placeholder="<%=onePatientData.phone%>">
+    </div>
+    <div class="form-group">
+      <label for="inputName"><i class="fa fa-home" aria-hidden="true"></i>  Address:</label>
+      <input type="text" name="name" class="form-control" id="" aria-describedby="emailHelp" placeholder="<%=onePatientData.address%>">
+    </div>
+
+    <button id="subBtn" type="submit" class="btn btn-success">Submit</button>
+  </form>
+
+</div>
+
+<footer>
+  <%- include('partials/footer') %>
+</footer>
+
+</body>
+</html>
