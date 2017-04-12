@@ -20,6 +20,44 @@ html {
     padding: 0px;
   }
 
+  #btnTextEdit #btnTextDelete {
+    color: #000;
+    font-weight: 600;
+  }
+
+  #pageDiv1{
+
+  }
+
+  #aptFuture{
+    display: none;
+  }
+
+  #aptHistory{
+    display: none;
+  }
+
+  #patientList {
+    font-size: 16px;
+    list-style-type:none;
+    padding: 0px;
+    margin-top: 20px;
+  }
+
+  #aptHover:hover {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  #showForm {
+    display: none;
+  }
+
+  #selHospital {
+    width: 85%;
+    margin: 0 auto;
+    display: block;
+  }
+
   #footer {
     bottom: 0;
     width: 100%;
@@ -31,32 +69,4 @@ html {
     }
 
   }
-}
-
-#btnTextEdit #btnTextDelete {
-  color: #000;
-  font-weight: 600;
-}
-
-#pageDiv1{
-
-}
-
-#aptFuture{
-  display: none;
-}
-
-#aptHistory{
-  display: none;
-}
-
-#patientList {
-  font-size: 16px;
-  list-style-type:none;
-  padding: 0px;
-  margin-top: 20px;
-}
-
-#aptHover:hover {
-  color: rgba(0, 0, 0, 0.5);
 }

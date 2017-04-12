@@ -5,6 +5,8 @@ $(document).ready(function() {
     let $divBtnFuture = $('#divBtnFuture');
     let $divBtnHistory = $('#divBtnHistory')
 
+    let $divBtnOptions = $('#divBtnOptions');
+
     let $btnTextEdit = $('#btnTextEdit');
     let $btnTextDelete = $('#btnTextDelete');
 
@@ -144,6 +146,10 @@ $(document).ready(function() {
 
     $divBtnFuture.click(function() {
         $('#aptFuture').fadeToggle("fast", "linear");
+    });
+
+    $divBtnOptions.click(function() {
+      $('#showForm').fadeToggle("fast", "linear");
     });
 
     //test data
