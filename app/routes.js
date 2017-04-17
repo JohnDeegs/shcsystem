@@ -137,6 +137,18 @@ module.exports = (app, passport) => {
 
     });
 
+    //Get total number of patients
+
+    app.get('/profile/patients/count', isLoggedIn, (req, res) => {
+
+      patientSchema.find().exec((err, results) => {
+        let count = results.length;
+        console.log(count);
+        res.send({count});
+      });
+
+    });
+
     app.post('/profile/patients/add', isLoggedIn, (req, res) => {
 
       let data = new patientSchema();
