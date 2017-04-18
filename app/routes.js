@@ -149,9 +149,13 @@ module.exports = (app, passport) => {
 
     });
 
-    app.post('/profile/patients/add', isLoggedIn, (req, res) => {
+    //add
 
-      let data = new patientSchema();
+    app.get('/profile/patients/addnew', isLoggedIn, (req, res) => {
+
+      res.render('newPatient.ejs');
+
+      /*let data = new patientSchema();
 
       data.name = 'John Smith';
       data.age = '21';
@@ -162,7 +166,26 @@ module.exports = (app, passport) => {
 
       data.save();
 
+      console.log("Success!");*/
+
+    });
+
+    app.post('/profile/patients/add', isLoggedIn, (req, res) => {
+
+      let data = new patientSchema();
+
+      data.name = req.body.name;
+      data.age = req.body.age;
+      data.gender = req.body.gender;
+      data.address = req.body.address;
+      data.phone = req.body.phone;
+      data.belongs_to.push(req.user.id);
+
+      data.save();
+
       console.log("Success!");
+
+      res.redirect('/profile/patients');
 
     });
 
@@ -360,6 +383,24 @@ module.exports = (app, passport) => {
       })
 
       res.redirect('/profile/patients');
+    });
+
+    //===========DELETE APT ==============
+
+    app.get('/profile/patients/appointments/delete/:id', isLoggedIn, (req, res) => {
+
+      let id = req.params.id;
+      console.log(id);
+
+      aptSchema.findOneAndRemove({_id: id}, (err, user) => {
+        if(err) throw err;
+
+        console.log("OBSOLETE!");
+
+      });
+
+      res.redirect('/profile/patients')
+
     });
 
 

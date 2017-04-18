@@ -15,7 +15,7 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="../js/typehead.min.js"></script>
-  <script src="../js/activateTypehead.js"></script>
+  <script src="../js/patients.js"></script>
 </head>
 
 <%- include('partials/navbar') %>
@@ -39,7 +39,7 @@
         </div>
       </form>
 
-      <a href="/profile/patients/search">Advanced Search</a>
+      <a href="/profile/patients/addnew"><button class="btn btn-success">Add Patient</button></a>
 
       <% for(var i = 0; i < patientData.length; i++){%>
 

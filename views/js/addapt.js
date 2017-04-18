@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+  //activates the time picker plugin
   $('#time').timepicker();
 
   //get the url of the current webpage so we can find out the specific patient we're looking at
@@ -12,22 +13,15 @@ $(document).ready(function(){
   let urlId = url.substr(url.length - 24);
   console.log(urlId);
 
+  /*when the form button has been clicked this function executes
+    it selects the form itself and assigns it a new "action". Here it submits it to our API
+    using the url variable made earlier. This is to ensure that we assign the appointment
+    to the correct patient
+  */
   $('#form-btn').on("click", function() {
     $('#saveForm').attr('action', '../../../../profile/patients/appointments/add/'+urlId+'');
     $("#saveForm").submit();
     e.preventDefault();
-  })
-
-  //Calls the appointment data for this patient from this endpoint.
-  $.post('../../../profile/patients/appointments/add/'+urlId+'', (data, status) => {
-
-    //Parses the data
-    let obj = JSON.parse(data);
-
-    //displays appointment db data on page
-
-
-    console.log(JSON.stringify(obj));
-    });
+  });
 
 });

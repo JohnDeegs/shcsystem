@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+  //In order to speed up the browser DOM we assign the JQuery selectors to JS variables
     let $aptFuture = $('#aptFuture');
     let $aptHistory = $('#aptHistory');
     let $divBtnFuture = $('#divBtnFuture');
@@ -9,10 +10,6 @@ $(document).ready(function() {
 
     let $btnTextEdit = $('#btnTextEdit');
     let $btnTextDelete = $('#btnTextDelete');
-
-    let testarr1 = [];
-    let testarr2 = [];
-
 
     //get the url of the current webpage so we can find out the specific patient we're looking at
     let url = window.location.href;
@@ -24,6 +21,7 @@ $(document).ready(function() {
     let urlId = url.substr(url.length - 24);
     console.log(urlId);
 
+    //activate the API endpoints upon clicking the following buttons
     $btnTextEdit.click(function(){
       window.location.href='../../../profile/patients/edit/'+urlId+'';
     })
@@ -104,6 +102,7 @@ $(document).ready(function() {
             }
         }
 
+        //We sort the future appointments by the most recent
         upcomingDates.sort(function(a, b) {
             var keyA = new Date(a.date),
                 keyB = new Date(b.date);
@@ -113,6 +112,7 @@ $(document).ready(function() {
             return 0;
         });
 
+        //We sort the past appointments by the most recent
         pastDates.sort(function(a, b) {
             var keyA = new Date(a.date),
                 keyB = new Date(b.date);
@@ -122,24 +122,21 @@ $(document).ready(function() {
             return 0;
         });
 
+        /*We loop through the upcomingDates object and append
+          the correct value that we want to the corresponding div
+        */
         for (let i = 0; i < upcomingDates.length; i++) {
-            $aptFuture.append('<div id="future"><h3>' + upcomingDates[i].date + ' ' + upcomingDates[i].time + '</h3><p>' + upcomingDates[i].report + '</p><a href="../../../profile/patients/appointments/edit/' + upcomingDates[i]._id + '"><button id="btnText" class="btn btn-success">Edit</button></a><button id="btnText" class="btn btn-success">Delete</button></div>');
+            $aptFuture.append('<div id="future"><h3>' + upcomingDates[i].date + ' ' + upcomingDates[i].time + '</h3><p>' + upcomingDates[i].report + '</p><a href="../../../profile/patients/appointments/edit/' + upcomingDates[i]._id + '"><button id="btnText" class="btn btn-success">Edit</button></a><a href="../../../profile/patients/appointments/delete/' + upcomingDates[i]._id + '"><button id="btnText" class="btn btn-success">Delete</button></a></div>');
         }
 
         for (let i = 0; i < pastDates.length; i++) {
-            $aptHistory.append('<div id="future"><h3>' + pastDates[i].date + ' ' + pastDates[i].time + '</h3><p>' + pastDates[i].report + '</p><a href="../../../profile/patients/appointments/edit/' + pastDates[i]._id + '"><button id="btnText" class="btn btn-success">Edit</button></a><button id="btnText" class="btn btn-success">Delete</button></div>');
+            $aptHistory.append('<div id="future"><h3>' + pastDates[i].date + ' ' + pastDates[i].time + '</h3><p>' + pastDates[i].report + '</p><a href="../../../profile/patients/appointments/edit/' + pastDates[i]._id + '"><button id="btnText" class="btn btn-success">Edit</button></a><a href="../../../profile/patients/appointments/delete/' + pastDates[i]._id + '"><button id="btnText" class="btn btn-success">Delete</button></a></div>');
         }
 
-
-
-        console.log(upcomingDates);
-        console.log(pastDates);
-
-        console.log(JSON.stringify(obj));
     });
 
 
-
+    /* Using this JQuery, we can use animations to fade in and out the list of appointments on click */
     $divBtnHistory.click(function() {
         $('#aptHistory').fadeToggle("fast", "linear");
     });
@@ -152,19 +149,5 @@ $(document).ready(function() {
       $('#showForm').fadeToggle("fast", "linear");
     });
 
-    //test data
-    var data = {
-        date: '1-1-2016',
-        report: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        belongs_to: ['' + urlId + '']
-    };
-    /*data.date = '1-1-2016';
-    data.report = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.';
-    data.belongs_to.push(urlId);*/
-
-
-    /*$.post('../../../profile/patients/appointments/add/'+urlId+'', data, (result) => {
-        console.log("posted");
-    });*/
 
 });
