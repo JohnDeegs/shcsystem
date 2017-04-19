@@ -10,6 +10,61 @@ html {
     font-family: 'Open Sans', sans-serif;
   }
 
+  //=============NAVBAR=========================================================
+
+  #navStyle {
+    background-color: #66bb6a;
+    color: #000;
+  }
+
+  #mainNavStyle{
+    color: #000;
+  }
+
+  #navLiStyle{
+    color: #000;
+  }
+
+  #navLiStyle:hover{
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  #toggleBtnStyle {
+    background-color: #000;
+  }
+
+  //======================================
+
+  #userDetails{
+    list-style-type:none;
+    padding: 0px;
+    width: 50%
+  }
+
+  #editBtn{
+    margin: 0 auto;
+    display: block;
+  }
+
+  #patientTag{
+    display: inline-block;
+  }
+
+  #pNumber{
+    font-size: 26px;
+    font-weight: 800;
+  }
+
+  #patientLink {
+    text-decoration: none; /* no underline */
+    color: #000;
+  }
+
+  #patientLink:hover {
+    text-decoration: none; /* no underline */
+    color: #5cb85c;
+  }
+
   #profiler{
     width: 100%;
     height: 150px;
@@ -30,46 +85,4 @@ html {
     }
 
   }
-}
-
-#userDetails{
-  list-style-type:none;
-  padding: 0px;
-  width: 50%
-}
-
-#editBtn{
-  margin: 0 auto;
-  display: block;
-}
-
-#patientsTotal{
-
-}
-
-#patientTag{
-  display: inline-block;
-}
-
-p{
-
-}
-
-#pNumber{
-  font-size: 26px;
-  font-weight: 800;
-}
-
-p{
-
-}
-
-#patientLink {
-  text-decoration: none; /* no underline */
-  color: #000;
-}
-
-#patientLink:hover {
-  text-decoration: none; /* no underline */
-  color: #5cb85c;
 }
