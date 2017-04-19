@@ -75,10 +75,13 @@ html {
     }
   }
 
+  #patientsTotal{
+    line-height: 140%;
+  }
+
   #patientTag{
     display: inline-block;
     font-size: 22px;
-
   }
 
   #pNumber{
