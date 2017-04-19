@@ -81,10 +81,13 @@ html {
     font-size: 26px
   }
 
-  #patientHolder {
-    display: block;
-    margin: 0 auto;
+  #patientList {
+    text-align: center;
     margin-top: 30px;
+  }
+
+  #patientHolder {
+    margin: 0;
   }
 
   #footer {
