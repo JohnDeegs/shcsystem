@@ -22,7 +22,7 @@
 
 <div class="container-fluid">
 
-  <h1 class="page-header" id="pHeader">Patients</h1>
+  <h1 class="page-header text-center" id="pHeader">Patients</h1>
 
   <div class="row">
 
@@ -32,27 +32,29 @@
         <button name="foo" value="upvote">Upvote</button>
       </form>-->
 
-      <form>
-        <div class="form-group">
-          <label for="usr">Quick Search</label>
-          <input class="typeahead tt-query" id="autocomplete" spellcheck="false" autocomplete="off" placeholder="Enter name here" name="patients" type="text" />
-        </div>
-      </form>
+      <div id="formView">
+        <form>
+          <div class="form-group">
+            <label for="usr">Quick Search</label>
+            <input class="typeahead tt-query" id="autocomplete" spellcheck="false" autocomplete="off" placeholder="Enter name here" name="patients" type="text" />
+          </div>
+        </form>
 
-      <a href="/profile/patients/addnew"><button class="btn btn-success">Add Patient</button></a>
+        <a href="/profile/patients/addnew"><button id="addPatientBtn" class="btn btn-success">Add Patient</button></a>
+      </div>
 
       <% for(var i = 0; i < patientData.length; i++){%>
 
       <% if(patientData[i].gender === "male") { %>
         <div id="patientHolder">
           <i class="fa fa-male fa-2x" aria-hidden="true"></i>
-          <h3 id="inline"><%= patientData[i].name; %></h3>
+          <h3 id="patientName"><%= patientData[i].name; %></h3>
           <a href="../profile/patients/view/<%=patientData[i].id%>"><button class="btn btn-success" >View</button></a>
         </div>
       <% } else { %>
         <div id="patientHolder">
           <i class="fa fa-female fa-2x" aria-hidden="true"></i>
-          <h3 id="inline"><%= patientData[i].name; %></h3>
+          <h3 id="patientName"><%= patientData[i].name; %></h3>
           <a href="../profile/patients/view/<%=patientData[i].id%>"><button class="btn btn-success" >View</button></a>
         </div>
       <% } %>
