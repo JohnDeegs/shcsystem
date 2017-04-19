@@ -45,11 +45,7 @@ html {
 
   #userDetails li{
     font-size: 22px;
-  }
-
-  #logoutBtn {
-    margin-top: 20px;
-  }
+}
 
   #editBtn, #logoutBtn {
     color: #000;
@@ -59,6 +55,11 @@ html {
     height: 50px;
     width: 100px;
     font-size: 18px;
+  }
+
+  #logoutBtn {
+    margin-top: 35px;
+    margin-bottom: 35px;
   }
 
   #editBtn:hover, #logoutBtn:hover {
@@ -76,6 +77,8 @@ html {
 
   #patientTag{
     display: inline-block;
+    font-size: 22px;
+    margin-top: 30px;
   }
 
   #pNumber{
@@ -84,6 +87,7 @@ html {
   }
 
   #patientLink {
+
     text-decoration: none; /* no underline */
     color: #000;
   }
