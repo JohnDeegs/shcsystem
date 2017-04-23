@@ -61,6 +61,18 @@ module.exports = (app, passport) => {
 
       let user_id = req.user.id;
 
+      /*infoSchema.findOne({
+      belongs_to: user_id //allows us to get data specific to the user
+      }, (err, info) => {
+        if(err){
+          console.log("Error");
+          return false;
+        }else{
+
+          console.log("Found user already");
+        }
+      });*/
+
       infoSchema.findOne({
       belongs_to: user_id //allows us to get data specific to the user
       }, (err, info) => {
@@ -68,6 +80,17 @@ module.exports = (app, passport) => {
           console.log("Error occured");
           return false;
         }else{
+          if(!info){
+            info = new infoSchema();
+
+            info.photo = "";
+            info.name = "First Timer User? Edit your information by clicking the Edit button";
+            info.location = "";
+            info.work = "";
+            info.belongs_to = [req.user.id];
+
+            info.save();
+          }
           res.render('profile.ejs', {
             userData: info
           });
@@ -141,7 +164,9 @@ module.exports = (app, passport) => {
 
     app.get('/profile/patients/count', isLoggedIn, (req, res) => {
 
-      patientSchema.find().exec((err, results) => {
+      let user_id = req.user.id;
+
+      patientSchema.find({belongs_to: user_id}).exec((err, results) => {
         let count = results.length;
         console.log(count);
         res.send({count});
@@ -154,19 +179,6 @@ module.exports = (app, passport) => {
     app.get('/profile/patients/addnew', isLoggedIn, (req, res) => {
 
       res.render('newPatient.ejs');
-
-      /*let data = new patientSchema();
-
-      data.name = 'John Smith';
-      data.age = '21';
-      data.gender = 'male';
-      data.address = 'Flower Lane, Dublin 1';
-      data.phone = '085736472';
-      data.belongs_to.push(req.user.id);
-
-      data.save();
-
-      console.log("Success!");*/
 
     });
 
@@ -314,7 +326,7 @@ module.exports = (app, passport) => {
 
     app.get('/profile/patients/appointments/addNew/:id', isLoggedIn, (req, res) => {
 
-      res.render('newTask.ejs')
+      res.render('newApt.ejs');
 
     });
 
