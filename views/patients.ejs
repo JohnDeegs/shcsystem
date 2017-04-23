@@ -50,13 +50,13 @@
           <div id="patientHolder">
             <i class="fa fa-male fa-2x" aria-hidden="true"></i>
             <h3 id="patientName"><%= patientData[i].name; %></h3>
-            <a href="../profile/patients/view/<%=patientData[i].id%>"><button class="btn btn-success" >View</button></a>
+            <a href="../profile/patients/view/<%=patientData[i].id%>"><button id="viewBtn" class="btn btn-success" >View</button></a>
           </div>
         <% } else { %>
           <div id="patientHolder">
             <i class="fa fa-female fa-2x" aria-hidden="true"></i>
             <h3 id="patientName"><%= patientData[i].name; %></h3>
-            <a href="../profile/patients/view/<%=patientData[i].id%>"><button class="btn btn-success" >View</button></a>
+            <a href="../profile/patients/view/<%=patientData[i].id%>"><button id="viewBtn" class="btn btn-success" >View</button></a>
           </div>
         <% } %>
 

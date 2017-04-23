@@ -7,9 +7,11 @@ const app = express();
 const port = Number(process.env.PORT || 8080);
 
 const mongoose = require('mongoose');
-const passport = require('passport');
-const flash = require('connect-flash');
 
+//our middleware
+const passport = require('passport');
+
+const flash = require('connect-flash');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');

@@ -57,21 +57,25 @@ html {
     font-size: 18px;
   }
 
-  #logoutBtn {
-    margin-top: 35px;
-    margin-bottom: 35px;
-  }
+
 
   #editBtn:hover, #logoutBtn:hover {
     color: rgba(0, 0, 0, 0.9);
     background-color: rgba(102, 187, 106, 0.9);
   }
 
-  @media  (min-width: 520px) and (max-width: 1600px) {
-    #editBtn, #logoutBtn {
+  @media  (min-width: 700px) and (max-width: 2000px) {
+      #logoutBtn {
       height: 75px;
       width: 150px;
       font-size: 26px;
+      margin-top: 30px !important;
+    }
+
+    #patientLink #patientTag{
+      display: inline-block;
+      font-size: 30px;
+      margin-bottom: 40px;
     }
   }
 

@@ -23,15 +23,19 @@ module.exports.up = function (done) {
 
   let patientColl = this.db.collection('patientinfos');
 
+  let placeHolder = [];
+
+  placeHolder.push(new ObjectID());
+
   let pateintData = [
   {
-    _id: new ObjectID(),
+    _id: placeHolder[0],
     phone: '085741235',
     address: '1 Flower Lane',
     gender: 'female',
     age: '8',
     name: 'Louise Burke',
-    belongs_to: [ObjectID("58d6f77a70fb928c20738e04")]
+    belongs_to: [ObjectID("58fd08d2049309338811bee3")]
   },
   {
     _id: new ObjectID(),
@@ -40,7 +44,7 @@ module.exports.up = function (done) {
     gender: 'male',
     age: '14',
     name: 'David Rollins',
-    belongs_to: [ObjectID("58d6f77a70fb928c20738e04")]
+    belongs_to: [ObjectID("58fd08d2049309338811bee3")]
   },
   {
     _id: new ObjectID(),
@@ -49,7 +53,7 @@ module.exports.up = function (done) {
     gender: 'female',
     age: '21',
     name: 'Alexia Hart',
-    belongs_to: [ObjectID("58d6f77a70fb928c20738e04")]
+    belongs_to: [ObjectID("58fd08d2049309338811bee3")]
   },
   {
     _id: new ObjectID(),
@@ -58,7 +62,7 @@ module.exports.up = function (done) {
     gender: 'male',
     age: '26',
     name: 'Jordan Belfort',
-    belongs_to: [ObjectID("58d6f77a70fb928c20738e04")]
+    belongs_to: [ObjectID("58fd08d2049309338811bee3")]
   },
   {
     _id: new ObjectID(),
@@ -67,7 +71,7 @@ module.exports.up = function (done) {
     gender: 'female',
     age: '42',
     name: 'Celine Dion',
-    belongs_to: [ObjectID("58d6f77a70fb928c20738e04")]
+    belongs_to: [ObjectID("58fd08d2049309338811bee3")]
   }
 ];
 
@@ -76,7 +80,7 @@ module.exports.up = function (done) {
   patientColl.insert(pateintData);
 
   //==================================================
-  //===========ADD USER ==============================
+  //===========ADD APPOINTMENTS ======================
   //==================================================
 
   let aptColl = this.db.collection('aptinfos');
@@ -86,36 +90,36 @@ module.exports.up = function (done) {
       _id: new ObjectID(),
       time: '2:00pm',
       report: 'Injured wrist',
-      date: '2015-04-09',
-      belongs_to: [ObjectID("58d94118876764114858157d")]
+      date: '2018-04-09',
+      belongs_to: [ObjectID(''+placeHolder[0]+'')]
     },
     {
       _id: new ObjectID(),
       time: '5:00pm',
       report: 'Migraines',
       date: '2016-07-02',
-      belongs_to: [ObjectID("58d94118876764114858157d")]
+      belongs_to: [ObjectID(''+placeHolder[0]+'')]
     },
     {
       _id: new ObjectID(),
       time: '2:00pm',
       report: 'Kidney Stone, sent consulatation to St.Vincents hospital Dublin.',
       date: '2017-01-02',
-      belongs_to: [ObjectID("58d94118876764114858157d")]
+      belongs_to: [ObjectID(''+placeHolder[0]+'')]
     },
     {
       _id: new ObjectID(),
       time: '4:00pm',
       report: 'Broken Ankle',
-      date: '2012-10-02',
-      belongs_to: [ObjectID("58d94118876764114858157d")]
+      date: '2019-10-02',
+      belongs_to: [ObjectID(''+placeHolder[0]+'')]
     },
     {
       _id: new ObjectID(),
       time: '2:00pm',
       report: 'Gum Disease',
       date: '2011-07-02',
-      belongs_to: [ObjectID("58d94118876764114858157d")]
+      belongs_to: [ObjectID(''+placeHolder[0]+'')]
     }
   ]
 
@@ -125,8 +129,19 @@ module.exports.up = function (done) {
   //===========ADD APPOINTMENTS ======================
   //==================================================
 
+  let infoColl = this.db.collection('userinfos');
 
+  let infoData = [
+    {
+      _id: new ObjectID(),
+      name: 'John Doe',
+      work: 'IFSC Clinic',
+      city: 'Dublin 1',
+      belongs_to: [ObjectID("58fd08d2049309338811bee3")]
+    }
+  ]
 
+  infoColl.insert(infoData);
 
 };
 

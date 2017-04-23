@@ -126,11 +126,11 @@ $(document).ready(function() {
           the correct value that we want to the corresponding div
         */
         for (let i = 0; i < upcomingDates.length; i++) {
-            $aptFuture.append('<div id="future"><h3>' + upcomingDates[i].date + ' ' + upcomingDates[i].time + '</h3><p>' + upcomingDates[i].report + '</p><a href="../../../profile/patients/appointments/edit/' + upcomingDates[i]._id + '"><button id="btnText" class="btn btn-success">Edit</button></a><a href="../../../profile/patients/appointments/delete/' + upcomingDates[i]._id + '"><button id="btnText" class="btn btn-success">Delete</button></a></div>');
+            $aptFuture.append('<div id="future"><h3>' + upcomingDates[i].date + ' ' + upcomingDates[i].time + '</h3><p id="report">' + upcomingDates[i].report + '</p><a href="../../../profile/patients/appointments/edit/' + upcomingDates[i]._id + '"><button id="btnText" class="btn btn-success">Edit</button></a><a href="../../../profile/patients/appointments/delete/' + upcomingDates[i]._id + '"><button id="btnText" class="btn btn-success">Delete</button></a></div>');
         }
 
         for (let i = 0; i < pastDates.length; i++) {
-            $aptHistory.append('<div id="future"><h3>' + pastDates[i].date + ' ' + pastDates[i].time + '</h3><p>' + pastDates[i].report + '</p><a href="../../../profile/patients/appointments/edit/' + pastDates[i]._id + '"><button id="btnText" class="btn btn-success">Edit</button></a><a href="../../../profile/patients/appointments/delete/' + pastDates[i]._id + '"><button id="btnText" class="btn btn-success">Delete</button></a></div>');
+            $aptHistory.append('<div id="future"><h3>' + pastDates[i].date + ' ' + pastDates[i].time + '</h3><p id="report">' + pastDates[i].report + '</p><a href="../../../profile/patients/appointments/edit/' + pastDates[i]._id + '"><button id="btnText" class="btn btn-success">Edit</button></a><a href="../../../profile/patients/appointments/delete/' + pastDates[i]._id + '"><button id="btnText" class="btn btn-success">Delete</button></a></div>');
         }
 
     });

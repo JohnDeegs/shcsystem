@@ -10,6 +10,31 @@ html {
     font-family: 'Open Sans', sans-serif;
   }
 
+  //=============NAVBAR=========================================================
+
+  #navStyle {
+    background-color: #66bb6a;
+    color: #000;
+  }
+
+  #mainNavStyle{
+    color: #000;
+  }
+
+  #navLiStyle{
+    color: #000;
+  }
+
+  #navLiStyle:hover{
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  #toggleBtnStyle {
+    background-color: #000;
+  }
+
+  //=============================================
+
   #footer {
     bottom: 0;
     width: 100%;

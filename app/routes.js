@@ -90,10 +90,12 @@ module.exports = (app, passport) => {
             info.belongs_to = [req.user.id];
 
             info.save();
+          }else{
+            res.render('profile.ejs', {
+              userData: info
+            });
           }
-          res.render('profile.ejs', {
-            userData: info
-          });
+
         }
         });
 
@@ -145,7 +147,9 @@ module.exports = (app, passport) => {
 
     app.get('/profile/patients', isLoggedIn, (req, res) => {
 
-      patientSchema.find({})
+      let user_id = req.user.id;
+
+      patientSchema.find({belongs_to: user_id})
       .exec((err, patients) => {
         if(!!err){
           console.log("Error occurred");
@@ -226,7 +230,9 @@ module.exports = (app, passport) => {
     app.get('/profile/patients/search', isLoggedIn, (req, res) => {
       let key = req.query.key;
 
-      patientSchema.find({})
+      let user_id = req.user.id;
+
+      patientSchema.find({belongs_to: user_id})
       .exec((err, patients) => {
         if(!!err){
           console.log("Error occurred");
